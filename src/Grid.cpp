@@ -1,9 +1,8 @@
 #include "Grid.h"
-#include "../include/Grid.h"
 
+#include <fstream>
 #include <stdexcept>
 
-#include "../include/Cell.h"
 
 namespace
 {
@@ -95,4 +94,23 @@ std::ostream& operator<<(std::ostream& os, const Grid& grid) {
         os << '\n';
     }
     return os;
+}
+
+Grid Grid::fromFile(const std::string& path)
+{
+    std::ifstream file(path);
+    if (!file)
+        throw std::runtime_error("Cannot open file: " + path);
+
+    std::vector<std::string> lines;
+    std::string line;
+    while (std::getline(file, line))
+    {
+        // Если файл сохранен в Windows
+        if (!line.empty() && line.back() == '\r')
+            line.pop_back();
+        if (!line.empty())
+            lines.push_back(line);
+    }
+    return Grid(lines);
 }

@@ -27,6 +27,11 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Grid& grid);
 
+    explicit Grid(const std::vector<std::string>& lines);
+
+    // Загрузка лабиринта из текстового файла
+    static Grid fromFile(const std::string& path);
+
 private:
     int rows_ = 0;
     int cols_ = 0;

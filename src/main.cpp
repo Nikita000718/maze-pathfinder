@@ -1,19 +1,15 @@
 #include <iostream>
+#include <string>
+
 #include "Grid.h"
 
-int main()
+int main(int argc, char* argv[])
 {
+    std::string path = argc > 1 ? argv[1] : "mazes/simple.txt";
+
     try
     {
-        Grid grid({
-            "##########",
-            "#S...#...#",
-            "#.##.#.#.#",
-            "#.#..#.#.#",
-            "#.#.##.#.#",
-            "#...#..#E#",
-            "##########",
-        });
+        Grid grid = Grid::fromFile(path);
 
         std::cout << grid << '\n';
         std::cout << "Size: " << grid.rows() << "x" << grid.cols() << '\n';
