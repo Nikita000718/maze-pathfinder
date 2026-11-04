@@ -26,6 +26,6 @@ FetchContent_MakeAvailable(Catch2)
 add_executable(maze_tests
         tests/test_grid.cpp
         tests/test_bfs.cpp
-        tests/tests_dfs.cpp
+        tests/test_dfs.cpp
 )
 target_link_libraries(maze_tests PRIVATE maze_core Catch2::Catch2WithMain)
