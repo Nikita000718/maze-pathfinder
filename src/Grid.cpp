@@ -114,3 +114,10 @@ Grid Grid::fromFile(const std::string& path)
     }
     return Grid(lines);
 }
+
+void Grid::markPath(const std::vector<Point>& path)
+{
+    for (Point p : path)
+        if (at(p) == Cell::Free)
+            set(p, Cell::Path);
+}

@@ -22,12 +22,13 @@ public:
     Cell at(Point p) const;
     void set(Point p, Cell cell);
 
+    // Помечает клетки пути символом '*'
+    void markPath(const std::vector<Point>& path);
+
     // Соседние наравление в которые можно шагнуть (4)
     std::vector<Point> neighbors(Point p) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Grid& grid);
-
-    explicit Grid(const std::vector<std::string>& lines);
 
     // Загрузка лабиринта из текстового файла
     static Grid fromFile(const std::string& path);
