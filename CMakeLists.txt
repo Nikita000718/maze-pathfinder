@@ -22,8 +22,8 @@ FetchContent_Declare(Catch2
         GIT_TAG v3.5.2)
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests
+add_executable(maze_tests
         tests/test_grid.cpp
         tests/test_bfs.cpp
 )
-target_link_libraries(tests PRIVATE maze_core Catch2::Catch2WithMain)
+target_link_libraries(maze_tests PRIVATE maze_core Catch2::Catch2WithMain)
