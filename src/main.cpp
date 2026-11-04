@@ -2,6 +2,7 @@
 #include <string>
 
 #include "BfsFinder.h"
+#include "DfsFinder.h"
 #include "Grid.h"
 
 void run(const IPathfinder& finder, const Grid& grid) {
@@ -28,6 +29,7 @@ int main(int argc, char* argv[]) {
         std::cout << grid << '\n';
 
         run(BfsFinder{}, grid);
+        run(DfsFinder{}, grid);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
         return 1;

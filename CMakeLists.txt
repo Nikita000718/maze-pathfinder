@@ -8,6 +8,7 @@ add_library(maze_core
         src/Grid.cpp
         src/Pathfinder.cpp
         src/BfsFinder.cpp
+        src/DfsFinder.cpp
 )
 target_include_directories(maze_core PUBLIC include)
 target_compile_options(maze_core PUBLIC -Wall -Wextra -Wpedantic)
@@ -25,5 +26,6 @@ FetchContent_MakeAvailable(Catch2)
 add_executable(maze_tests
         tests/test_grid.cpp
         tests/test_bfs.cpp
+        tests/tests_dfs.cpp
 )
 target_link_libraries(maze_tests PRIVATE maze_core Catch2::Catch2WithMain)
