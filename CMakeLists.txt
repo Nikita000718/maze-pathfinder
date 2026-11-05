@@ -11,6 +11,9 @@ add_library(maze_core
         src/DfsFinder.cpp
         src/DijkstraFinder.cpp
         src/AStarFinder.cpp
+        src/Generator.cpp
+        src/BacktrackerGenerator.cpp
+        src/KruskalGenerator.cpp
 )
 target_include_directories(maze_core PUBLIC include)
 target_compile_options(maze_core PUBLIC -Wall -Wextra -Wpedantic)
@@ -31,5 +34,6 @@ add_executable(maze_tests
         tests/test_dfs.cpp
         tests/test_dijkstra.cpp
         tests/test_astar.cpp
+        tests/test_generators.cpp
 )
 target_link_libraries(maze_tests PRIVATE maze_core Catch2::Catch2WithMain)

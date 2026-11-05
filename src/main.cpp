@@ -1,11 +1,14 @@
 #include <iostream>
+#include <random>
 #include <string>
 
 #include "AStarFinder.h"
+#include "BacktrackerGenerator.h"
 #include "BfsFinder.h"
 #include "DfsFinder.h"
 #include "DijkstraFinder.h"
 #include "Grid.h"
+#include "KruskalGenerator.h"
 
 void run(const IPathfinder& finder, const Grid& grid) {
     Result result = finder.find(grid);
@@ -24,11 +27,20 @@ void run(const IPathfinder& finder, const Grid& grid) {
     std::cout << solved << '\n';
 }
 
+Grid loadGrid(const std::string& arg) {
+    unsigned seed = std::random_device{}();
+    if (arg == "--backtracker")
+        return BacktrackerGenerator{}.generate(8, 20, seed);
+    if (arg == "--kruskal")
+        return KruskalGenerator{}.generate(8, 20, seed);
+    return Grid::fromFile(arg);
+}
+
 int main(int argc, char* argv[]) {
     std::string path = argc > 1 ? argv[1] : "mazes/medium.txt";
 
     try {
-        Grid grid = Grid::fromFile(path);
+        Grid grid = loadGrid(path);
         std::cout << grid << '\n';
 
         run(BfsFinder{}, grid);
