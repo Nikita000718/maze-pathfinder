@@ -10,6 +10,7 @@ add_library(maze_core
         src/BfsFinder.cpp
         src/DfsFinder.cpp
         src/DijkstraFinder.cpp
+        src/AStarFinder.cpp
 )
 target_include_directories(maze_core PUBLIC include)
 target_compile_options(maze_core PUBLIC -Wall -Wextra -Wpedantic)
@@ -29,5 +30,6 @@ add_executable(maze_tests
         tests/test_bfs.cpp
         tests/test_dfs.cpp
         tests/test_dijkstra.cpp
+        tests/test_astar.cpp
 )
 target_link_libraries(maze_tests PRIVATE maze_core Catch2::Catch2WithMain)

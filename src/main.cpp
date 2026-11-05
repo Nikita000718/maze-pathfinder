@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+#include "AStarFinder.h"
 #include "BfsFinder.h"
 #include "DfsFinder.h"
 #include "DijkstraFinder.h"
@@ -33,6 +34,8 @@ int main(int argc, char* argv[]) {
         run(BfsFinder{}, grid);
         run(DfsFinder{}, grid);
         run(DijkstraFinder{}, grid);
+        run(AStarFinder{Heuristic::Manhattan}, grid);
+        run(AStarFinder{Heuristic::Euclidean}, grid);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
         return 1;
