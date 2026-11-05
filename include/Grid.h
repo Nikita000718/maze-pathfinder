@@ -20,6 +20,10 @@ public:
     bool inBounds(Point p) const;
     bool isWalkable(Point p) const;
     Cell at(Point p) const;
+
+    // Стоимость входа в клетку
+    int cost(Point p) const { return costs_[p.row][p.col]; }
+
     void set(Point p, Cell cell);
 
     // Помечает клетки пути символом '*'
@@ -37,6 +41,7 @@ private:
     int rows_ = 0;
     int cols_ = 0;
     std::vector<std::vector<Cell>> cells_;
+    std::vector<std::vector<int>> costs_;
     Point start_;
     Point end_;
 };

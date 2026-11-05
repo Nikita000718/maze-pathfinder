@@ -25,3 +25,6 @@ public:
 // Собирает путь по массиву
 std::vector<Point> restorePath(const std::vector<std::vector<Point>>& parent,
                                Point start, Point end);
+
+// Сумма стоимостей клеток пути (старт не считается)
+int pathCost(const Grid& grid, const std::vector<Point>& path);

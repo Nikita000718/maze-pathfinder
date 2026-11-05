@@ -29,6 +29,7 @@ Grid::Grid(const std::vector<std::string>& lines)
     rows_ = static_cast<int>(lines.size());
     cols_ = static_cast<int>(lines[0].size());
     cells_.assign(rows_, std::vector<Cell>(cols()));
+    costs_.assign(rows_, std::vector<int>(cols_, 1));
 
     int startCount = 0;
     int endCount = 0;
@@ -38,13 +39,21 @@ Grid::Grid(const std::vector<std::string>& lines)
         if (static_cast<int>(lines[r].size()) != cols_)
             throw std::invalid_argument("Rows have different lengths");
 
-        for (int c = 0; c < cols_; ++c)
-        {
-            Cell cell = fromChar(lines[r][c]);
+        for (int c = 0; c < cols_; ++c) {
+            char ch = lines[r][c];
+
+            // Цифра 1-9: проходимая клетка со стоимостью
+            if (ch >= '1' && ch <= '9') {
+                cells_[r][c] = Cell::Free;
+                costs_[r][c] = ch - '0';
+                continue;
+            }
+
+            Cell cell = fromChar(ch);
             cells_[r][c] = cell;
 
             if (cell == Cell::Start) { start_ = {r, c}; ++startCount; }
-            if (cell == Cell::End) {end_ = {r, c}; ++endCount; }
+            if (cell == Cell::End)   { end_ = {r, c};   ++endCount; }
         }
     }
 
@@ -88,9 +97,16 @@ std::vector<Point> Grid::neighbors(Point p) const
 }
 
 std::ostream& operator<<(std::ostream& os, const Grid& grid) {
-    for (const auto& row : grid.cells_) {
-        for (Cell cell : row)
-            os << toChar(cell);
+    for (int r = 0; r < grid.rows_; ++r) {
+        for (int c = 0; c < grid.cols_; ++c) {
+            Cell cell = grid.cells_[r][c];
+            int cost = grid.costs_[r][c];
+
+            if (cell == Cell::Free && cost > 1)
+                os << static_cast<char>('0' + cost);
+            else
+                os << toChar(cell);
+        }
         os << '\n';
     }
     return os;

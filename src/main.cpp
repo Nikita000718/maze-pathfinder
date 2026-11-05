@@ -3,6 +3,7 @@
 
 #include "BfsFinder.h"
 #include "DfsFinder.h"
+#include "DijkstraFinder.h"
 #include "Grid.h"
 
 void run(const IPathfinder& finder, const Grid& grid) {
@@ -14,7 +15,8 @@ void run(const IPathfinder& finder, const Grid& grid) {
         return;
     }
     std::cout << "path length " << result.path.size() - 1
-              << ", visited " << result.visited << " cells\n";
+          << ", cost " << pathCost(grid, result.path)
+          << ", visited " << result.visited << " cells\n";
 
     Grid solved = grid;  // копия, чтобы не портить исходный лабиринт
     solved.markPath(result.path);
@@ -30,6 +32,7 @@ int main(int argc, char* argv[]) {
 
         run(BfsFinder{}, grid);
         run(DfsFinder{}, grid);
+        run(DijkstraFinder{}, grid);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << '\n';
         return 1;

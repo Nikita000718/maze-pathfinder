@@ -12,3 +12,11 @@ std::vector<Point> restorePath(const std::vector<std::vector<Point>>& parent, Po
     std::reverse(path.begin(), path.end());
     return path;
 }
+
+int pathCost(const Grid &grid, const std::vector<Point>& path) {
+    int total = 0;
+
+    for (size_t i = 1; i < path.size(); ++i)
+        total += grid.cost(path[i]);
+    return total;
+}
